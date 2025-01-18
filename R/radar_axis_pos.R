@@ -1,8 +1,8 @@
 radar_axis_pos <- function(data, variables = NULL, max.iteration = 1000, minimum.degrees = 3) {
 
   #packages
-  library(tidyverse)
-  library(digest)
+  #library(tidyverse)
+  #library(digest)
 
   #select numeric variables if they aren't specified
   if (is.null(variables)) {
@@ -51,7 +51,7 @@ radar_axis_pos <- function(data, variables = NULL, max.iteration = 1000, minimum
     Current_Placement = current.placement,
     Real_Difference = real.difference
   )
-  placement.str <- digest(current.placement)
+  placement.str <- digest::digest(current.placement)
   assign(placement.str, iteration.count, envir = stored.placements)
   sum.diff.stored <- numeric()
 
