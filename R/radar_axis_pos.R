@@ -1,4 +1,4 @@
-radar_plot_pos <- function(data, variables = NULL, max.iteration = 1000, minimum.degrees = 3) {
+radar_axis_pos <- function(data, variables = NULL, max.iteration = 1000, minimum.degrees = 3) {
 
   #packages
   library(tidyverse)
