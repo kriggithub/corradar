@@ -1,9 +1,11 @@
 Package: corradar
-Title: What the Package Does (One Line, Title Case)
+Title: Create Correlation Based Radar Plots
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+    person("Kurt", "Riggin", , "krigscholar@gmail.com", role = c("aut", "cre"), 
+    comment = c(ORCID = "0009-0004-4700-1251"))
+Description: Package for visualizing data on radar (spider) plots using a correlative
+    force based algorithm to derive axis positions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
