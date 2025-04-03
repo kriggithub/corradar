@@ -11,10 +11,10 @@ radar_axis_pos <- function(data, variables = NULL, max.iteration = 1000, minimum
   }
 
   #ensure data only contains numeric columns
-  data <- data[, variables, drop = FALSE] %>% select_if(is.numeric)
+  data <- dplyr::select_if(data[, variables, drop = FALSE], is.numeric)
 
   #calculate correlation matrix for selected variables
-  corr.matrix <- cor(data, use='complete.obs')
+  corr.matrix <- stats::cor(data, use='complete.obs')
 
 
   #convert correlation matrix to target length differences
@@ -292,9 +292,9 @@ radar_axis_pos <- function(data, variables = NULL, max.iteration = 1000, minimum
 
 
 #sample use of the function
-#iris
-#iris.pos <- radar_plot_pos(iris, max.iteration = 2000, minimum.degrees = 5)
-#iris.pos
+iris
+iris.pos <- radar_axis_pos(iris, max.iteration = 2000, minimum.degrees = 5)
+iris.pos
 
 
 #asthma
