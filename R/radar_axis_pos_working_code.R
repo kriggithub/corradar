@@ -207,12 +207,12 @@ cat(sprintf("Minimum remaining force found at iteration %d with value %.5f",
 
 
 
-# to plot remainign forces across iterations
-# iteration_numbers <- vapply(iteration, function(x) x$Iteration, numeric(1))
-# plot(iteration_numbers, sum_forces, type = "o", col = "blue", pch = 16,
-#      main = "Sum Remaining Force Across Iterations",
-#      xlab = "Iteration Number", ylab = "Sum Remaining Force",
-#      xlim = c(0, min_iteration + 10))
+# to plot remaining forces across iterations
+iteration_numbers <- vapply(iteration, function(x) x$Iteration, numeric(1))
+plot(iteration_numbers, sum_forces, type = "o", col = "blue", pch = 16,
+     main = "Sum Remaining Force Across Iterations",
+     xlab = "Iteration Number", ylab = "Sum Remaining Force",
+     xlim = c(0, min_iteration + 10))
 
 
 
@@ -225,13 +225,14 @@ cat(sprintf("Minimum remaining force found at iteration %d with value %.5f",
 ##############################################################################
 
 
-
+# development of process to include minimum distance, keeping logical relationships
+# and not breaking the distance for visibility
 
 
 
 # set list for to adjust for final adjusted positions (after minimum degrees)
 adjusted_cur_pos <- iteration[[min_iteration]]$Current_Placement
-# badjusted_cur_pos <- adjusted_cur_pos
+badjusted_cur_pos <- adjusted_cur_pos
 
 
 adjusted_var_dist <- matrix(ncol=num_var, nrow=num_var)
@@ -308,10 +309,9 @@ while (any(true.final.placement > 2*pi)) {
 }
 
 
-print("True Final Placement:")
 print(true.final.placement)
 
-return(true.final.placement = true.final.placement)
+#return(true.final.placement = true.final.placement)
 
 
 
