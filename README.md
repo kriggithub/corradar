@@ -1,12 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# corradar
+# corradar: Create Correlation Based Radar Plots
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of corradar is to …
+The `corradar` R package was designed to standarized axes positions in a radar plot.
 
 ## Installation
 
