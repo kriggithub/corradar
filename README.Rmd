@@ -13,12 +13,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-# corradar
+# corradar: Create Correlation Based Radar Plots
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of corradar is to ...
+The `corradar` R package was designed to address the limitations of typical radar plots. 
+
+First, corradar plots use a correlation based algorithm to calculate axes positions, as opposed to axes order being set arbitrarily in typical radar plots. The ideology of this algorithm is that variables with stronger linear pair-wise correlations will be closer in proximity on the corradar plot than weak correlations.
+In the example corradar plot of test patient health profiles, we can see that hip and waist measurements are generally more strongly correlated than waist measurements and age.
+
+![Example corradar plot](man/figures/corradar_example.png)
+
+Corradar plots also take inspiration from parallel coordinate plots in order to normalize axis, with the center of the corradar plot being the minimum value for each variable, and the outermost ring being the maximum.
+
+Additionally, corradar plots implement curved lines to show mean values for each variable, with shaded bands showing one standard deviation above and below, to see the approximate shape of the variable's distribution.
+
+Corradar plots also are able to plot multiple groups of data on the same plot for comparison.
+
 
 ## Installation
 
@@ -29,27 +41,3 @@ You can install the development version of corradar from [GitHub](https://github
 pak::pak("kriggithub/corradar")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(corradar)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
