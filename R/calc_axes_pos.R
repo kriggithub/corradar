@@ -4,19 +4,10 @@
 #' @param vars Variables to calculate axis positions for.
 #' @param max_iteration Maxmimum amount of iterations for algorithm to run.
 #' @param min_degrees Minimum degrees between each variable for visual spacing.
-#' @param return_diagnostics Logical. If `FALSE` (default), return only the
-#'   optimal axis positions. If `TRUE`, also return diagnostic information
-#'   including the iteration at which the optimum was found and the residual
-#'   force value.
 #'
-#' @returns
-#' If `return_diagnostics = FALSE` (default), a named numeric vector of axis
-#' positions in radians. If `TRUE`, a list with elements:
-#' \describe{
-#'   \item{pos}{Named numeric vector of axis positions.}
-#'   \item{best_iteration}{Iteration at which the best solution was found.}
-#'   \item{best_resid_force}{Residual force at the best iteration.}
-#' }
+#' @returns A named numeric vector of axis positions in radians, wrapped to the
+#'   interval [0, 2π).
+#'
 #' @export
 #'
 #' @examples
@@ -28,8 +19,7 @@
 calc_axes_pos <- function(data,
                           vars = NULL,
                           max_iteration = 1000,
-                          min_degrees = 3,
-                          return_diagnostics = FALSE){
+                          min_degrees = 3){
 
   # Step 0: Pre-function data cleaning and setup
 
@@ -203,18 +193,7 @@ calc_axes_pos <- function(data,
   # Finalize best positions
   out <- as.numeric(best_pos[1, ])
   names(out) <- colnames(best_pos)
-
-  # Return best positions (default)
-  if (!return_diagnostics) {
-    return(out)
-  }
-
-  # Return iteration and force info if diagnostic is set to TRUE
-  list(
-    pos = out,
-    best_iteration = best_iteration,
-    best_resid_force = best_resid_force
-  )
+  out
 }
 
 
