@@ -4,13 +4,7 @@
 \alias{calc_axes_pos}
 \title{Calculate axes positions for corradar plots.}
 \usage{
-calc_axes_pos(
-  data,
-  vars = NULL,
-  max_iteration = 1000,
-  min_degrees = 3,
-  return_diagnostics = FALSE
-)
+calc_axes_pos(data, vars = NULL, max_iteration = 1000, min_degrees = 3)
 }
 \arguments{
 \item{data}{Data file.}
@@ -20,20 +14,10 @@ calc_axes_pos(
 \item{max_iteration}{Maxmimum amount of iterations for algorithm to run.}
 
 \item{min_degrees}{Minimum degrees between each variable for visual spacing.}
-
-\item{return_diagnostics}{Logical. If \code{FALSE} (default), return only the
-optimal axis positions. If \code{TRUE}, also return diagnostic information
-including the iteration at which the optimum was found and the residual
-force value.}
 }
 \value{
-If \code{return_diagnostics = FALSE} (default), a named numeric vector of axis
-positions in radians. If \code{TRUE}, a list with elements:
-\describe{
-\item{pos}{Named numeric vector of axis positions.}
-\item{best_iteration}{Iteration at which the best solution was found.}
-\item{best_resid_force}{Residual force at the best iteration.}
-}
+A named numeric vector of axis positions in radians, wrapped to the
+interval [0, 2π).
 }
 \description{
 Calculate axes positions for corradar plots.
