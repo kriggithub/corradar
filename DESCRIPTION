@@ -2,19 +2,17 @@ Package: corradar
 Title: Create Correlation Based Radar Plots
 Version: 0.0.0.9000
 Authors@R: 
-    person("Kurt", "Riggin", , "krigscholar@gmail.com", role = c("aut", "cre"), 
+    person("Kurt", "Riggin", , "krigscholar@gmail.com", role = c("aut", "cre", "cph"), 
     comment = c(ORCID = "0009-0004-4700-1251"))
 Description: Package for visualizing data on radar (spider) plots using a correlative
     force based algorithm to derive axis positions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 URL: https://github.com/kriggithub/corradar
 BugReports: https://github.com/kriggithub/corradar/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
-    digest,
-    dplyr
