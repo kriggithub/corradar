@@ -25,11 +25,11 @@ In the example corradar plot of test patient health profiles, we can see that hi
 
 ![Example corradar plot](man/figures/corradar_example.png)
 
-Corradar plots also take inspiration from parallel coordinate plots in order to normalize axis, with the center of the corradar plot being the minimum value for each variable, and the outermost ring being the maximum.
+corradar plots also take inspiration from parallel coordinate plots in order to normalize axis, with the center of the corradar plot being the minimum value for each variable, and the outermost ring being the maximum.
 
 Additionally, corradar plots implement curved lines to show mean values for each variable, with shaded bands showing one standard deviation above and below, to see the approximate shape of the variable's distribution.
 
-Corradar plots also are able to plot multiple groups of data on the same plot for comparison.
+corradar plots also are able to plot multiple groups of data on the same plot for comparison.
 
 
 ## Installation
@@ -40,4 +40,28 @@ You can install the development version of corradar from [GitHub](https://github
 # install.packages("pak")
 pak::pak("kriggithub/corradar")
 ```
+
+
+Or, you can download it from CRAN with
+
+``` r
+install.packages("standrecon")
+```
+
+
+## Example
+
+The example below demonstrates how to compute axes positions for a corradar plot using the iris dataset.
+
+```{r example}
+library(corradar)
+
+# Load iris data included with R
+data(iris)
+
+# Calculate axes positions
+iris_axes_pos <- calc_axes_pos(iris)
+
+head(iris_axes_pos)
+
 
