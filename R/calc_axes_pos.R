@@ -190,6 +190,15 @@ calc_axes_pos <- function(data,
     iteration_count <- iteration_count + 1
   }
 
+
+
+  ##########################################
+  # GOING TO NEED CODE HERE FOR IMPLEMENTING MIN_DEGREES AND ALSO ALIGNING VARS BACK TO ORIGIN (helper functions)
+
+
+
+
+
   # Finalize best positions
   out <- as.numeric(best_pos[1, ])
   names(out) <- colnames(best_pos)

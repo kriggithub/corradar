@@ -9,3 +9,11 @@ test_that("wrap_0_2pi() correctly sets positions within 0 and 2pi", {
   expect_equal(out, expected_pos)
 
 })
+
+
+
+
+test_that("rotate_axis() correctly rotates positions", {
+
+
+})
