@@ -191,20 +191,20 @@ calc_axes_pos <- function(data,
   }
 
 
-
-  ##########################################
-  # GOING TO NEED CODE HERE FOR IMPLEMENTING MIN_DEGREES AND ALSO ALIGNING VARS BACK TO ORIGIN (helper functions)
-
-
-
-
-
-  # Finalize best positions
+  # Pull out best position
   out <- as.numeric(best_pos[1, ])
   names(out) <- colnames(best_pos)
+
+
+  ##########################################
+  # GOING TO NEED CODE HERE FOR IMPLEMENTING MIN_DEGREES, ORDERING AXES AND ALSO ALIGNING BACK TO ORIGIN (helper functions)
+
+
+  # Rotate and reorder axes
+  out <- rotate_axis(out)
+
+  # Return position
   out
 }
-
-
 
 
