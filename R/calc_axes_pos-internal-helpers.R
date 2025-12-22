@@ -27,61 +27,12 @@ wrap_0_2pi <- function(theta) {
 
 
 
-#' Enforce minimum radial distances on a circle.
-#'
-#' @param theta A numeric vector of angles in radians.
-#' @param min_dist A numeric value for the minimum distance between each element.
-#'
-#' @returns  A numeric vector of the same length as `theta`, with all values exceeding `min_dist`
-#' @noRD
-adj_min_dist <- function(theta,
-                         min_dist) {
-  # Pull out number of variables
-  n_vars <- length(theta)
-
-  # Ensure that it is possible to space out a solution
-  if (n_vars * min_dist > (2*pi) + 1e-12) {
-    stop("min_dist is too large for the number of variables.")
-  }
-
-  # Store order of variables
-  vars_order <- order(theta)
-
-  # Sort the variables so that they are in increasing distance from origin
-  vars_sorted <- theta[vars_order]
-
-  # Build vector of gaps from sorted order (including gap between first and last because it's a circle)
-  gap_vec <- c(diff(vars_sorted), (2*pi) - vars_sorted[n] + vars_sorted[1])
-
-  # Begin loop increase the smallest gap to min_dist, and taking the difference from the largest gap
-  while (min(gap_vec) < min_dist){
-
-    # Identify smallest gap
-    min_gap <- which.min(gap_vec)
-
-    # Identify largest gap
-    max_gap <- which.max(gap_vec)
-
-    # Identify deficit needed to move
-    deficit <- min_dist
-
-
-
-
-  }
-
-
-}
-
-
-
-
-#' Rotate a numeric vector back to origin.
+#' Rotate and sort a numeric vector back to origin.
 #'
 #' @param theta A numeric vector of angles in radians.
 #'
-#' @returns A numeric vector of the same length as `theta`, rotated so that first element is at the origin.
-#' @noRD
+#' @returns A numeric vector of the same length as `theta`, rotated so that first element is at the origin, and sorted in order of increasing distance.
+#' @noRd
 rotate_axis <- function(theta) {
 
   # Capture position of first angle
@@ -96,6 +47,9 @@ rotate_axis <- function(theta) {
   # Wrap angles back into  interval [0, 2π) (helper function)
   theta <- wrap_0_2pi(theta)
 
+  # Sort axes
+  theta <- sort(theta)
+
   # Return theta
   theta
 }
@@ -103,7 +57,75 @@ rotate_axis <- function(theta) {
 
 
 
+#' Enforce minimum radial distances on a circle.
+#'
+#' @param theta A numeric vector of angles in radians.
+#' @param min_dist A numeric value for the minimum distance between each element.
+#'
+#' @returns  A numeric vector of the same length as `theta`, with all values exceeding `min_dist`
+#' @noRd
+adj_min_dist <- function(theta,
+                         min_dist) {
 
+  # Rotate and order variables
+  theta <- rotate_axis(theta)
+
+  # Create helper function to find vector of gaps between variables, including the last wrap around
+  n_vars <- length(theta)
+  gaps <- function (theta) {
+    c(diff(theta), (2 * pi) - theta[n_vars] + theta[1])
+  }
+
+  # Compute gap vector
+  gap_vec <- gaps(theta)
+
+  # Create helper function to find the right axes of a gap
+  # If last axis is left side of gap, then right side is the first axis
+  next_axis <- function (i) {
+    (i %% n_vars) + 1L
+  }
+
+  # Begin loop
+  while (min(gap_vec) < min_dist) {
+
+    # Identify the left (i) axis of the smallest gap (stays still)
+    sm_gap_i <- which.min(gap_vec)
+
+    # Identify size of the smallest gap
+    sm_gap <- gap_vec[sm_gap_i]
+
+    # Determine amount needed to move axes forward
+    amt_move <- min_dist - sm_gap
+
+    # Identify the right (j) axis of the largest gap (stays still)
+    # If largest gap is the part that wraps, then first element is right side
+    lg_gap_i <- which.max(gap_vec)
+    lg_gap_j <- next_axis(lg_gap_i)
+
+    # Identify the axis in between i & j that need to move forward
+    # Includes i+1 up to (but not including) j
+    # Loop through variables
+    vars_to_move <- integer(0)
+    cur_var <- next_axis(sm_gap_i)
+    while (cur_var != lg_gap_j) {
+      vars_to_move <- c(vars_to_move, cur_var)
+      cur_var <- next_axis(cur_var)
+    }
+
+    # Move identified axes forward
+    theta[vars_to_move] <- theta[vars_to_move] + amt_move
+
+    # Rotate and reorder axes back
+    theta <- rotate_axis(theta)
+
+    # Recompute gap vector
+    gap_vec <- gaps(theta)
+  }
+
+  # Return theta
+  theta
+
+}
 
 
 
