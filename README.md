@@ -48,12 +48,6 @@ You can install the development version of corradar from
 pak::pak("kriggithub/corradar")
 ```
 
-Or, you can download it from CRAN with
-
-``` r
-install.packages("standrecon")
-```
-
 ## Example
 
 The example below demonstrates how to compute axes positions for a
